@@ -2,13 +2,31 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilo.css">
     <script src="js/popper.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/popper.min.js"></script>
+    <script src="js/push.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <meta name="theme-color" content="#51575c">
+    <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="shortcut icon" type="image/png" href="img/cart.jpeg">
+    <link rel="apple-touch-icon" href="img/cart.jpeg">
+    <link rel="apple-touch-startup-image" href="img/cart.jpeg">
+    <link rel="manifest" href="./manifest.json">
+    
     
     <link rel="stylesheet" href="css/sweetalert2.min.css">
 
@@ -17,6 +35,14 @@
 </head>
 
 <body>
+    <script type="text/javascript">
+        if (Push.Permission.GRANTED) {
+            window.onload = function () {
+                Push.Permission.request();
+            }
+        }
+    </script>
+
     <header>
         <div class="container">
             <div class="row justify-content-between mb-5">
@@ -107,29 +133,46 @@
                             </div>
                         </div>
                     </form>
-
-
                 </div>
-
-
             </div>
-
         </div>
     </main>
 
 
-
-
-
     </div>
-    <script src="js/valueSW.js"></script>
+    <!-- <script src="js/valueSW.js"></script> -->
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/sweetalert2.min.js"></script>
+
+    <script type="text/javascript">
+        document.getElementById('procesar-compra').onclick = function(){
+            Push.create('ALMACENES TECNO-DIGITAL', {
+                body: 'Listo! Ya tienes tu nueva compra. Revisa tú email, para más información',
+                icon: 'img/cart.jpeg',
+                timeout: 5000,
+                vibrate: [100, 100, 100],
+                onClick: function(){
+                    alert('Click en la Notificación');
+                }
+            })
+        }
+
+        setInterval(function() {
+            Push.create('ALMACENES TECNO-DIGITAL', {
+                body: 'Tenemos NUEVOS productos en existencia.',
+                icon: 'img/cart.jpeg',
+                timeout: 5000,
+                vibrate: [100, 100, 100],
+                onClick: function () {
+                    link: 'jaatorres.github.io'
+                }
+            })
+        }, 10000000);
+    </script>
     
     <script type="text/javascript"
     src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
 
     <script src="js/carrito.js"></script>
     <script src="js/compra.js"></script>
